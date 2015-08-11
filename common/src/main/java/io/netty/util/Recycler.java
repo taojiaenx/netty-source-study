@@ -87,9 +87,6 @@ public abstract class Recycler<T> {
     }
 
     public final boolean recycle(T o, Handle handle) {
-        if (logger.isDebugEnabled()) {
-        	logger.debug("-Dio.netty.recycler.thread local size: {}", threadLocal.size());
-        }
         DefaultHandle h = (DefaultHandle) handle;
         if (h.stack.parent != this) {
             return false;
