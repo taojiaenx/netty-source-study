@@ -87,6 +87,9 @@ public abstract class Recycler<T> {
     }
 
     public final boolean recycle(T o, Handle handle) {
+        if (logger.isDebugEnabled()) {
+        	logger.debug("-Dio.netty.recycler.thread local size: {}", threadLocal.size());
+        }
         DefaultHandle h = (DefaultHandle) handle;
         if (h.stack.parent != this) {
             return false;
@@ -296,9 +299,6 @@ public abstract class Recycler<T> {
         }
 
         DefaultHandle pop() {
-            if (logger.isDebugEnabled()) {
-            	logger.debug("-Dio.netty.recycler.thread elements size: {}", this.elements.length);
-            }
             int size = this.size;
             if (size == 0) {
                 if (!scavenge()) {
