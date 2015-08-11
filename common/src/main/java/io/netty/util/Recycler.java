@@ -296,6 +296,9 @@ public abstract class Recycler<T> {
         }
 
         DefaultHandle pop() {
+            if (logger.isDebugEnabled()) {
+            	logger.debug("-Dio.netty.recycler.thread elements size: {}", this.elements.length);
+            }
             int size = this.size;
             if (size == 0) {
                 if (!scavenge()) {
